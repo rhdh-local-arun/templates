@@ -1,0 +1,36 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: team-selector-demo
+  title: Team Selector Template
+  description: >
+    Example template demonstrating a custom TeamSelector field
+    that fetches dummy team data from an external API.
+spec:
+  owner: user:guest
+  type: service
+
+  parameters:
+    - title: Team Selection
+      description: Choose a team fetched from an external dummy API.
+      required: ['team']
+      properties:
+        team:
+          type: string
+          title: Select a Team
+          ui:field: TeamSelector
+          ui:options:
+            apiUrl: 'https://dummyjson.com/users'
+
+  steps:
+    - id: log
+      name: Log Selected Team
+      action: debug:log
+      input:
+        message: >
+          The selected team is: ${{ parameters.team }}
+
+  output:
+    text:
+      - title: Selected Team
+        content: 'You selected: ${{ parameters.team }}'

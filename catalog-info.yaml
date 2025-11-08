@@ -1,0 +1,15 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: example-api
+  description: Example API for demonstration purposes
+  tags:
+    - rest
+    - openapi
+spec:
+  type: openapi
+  lifecycle: production
+  owner: team-example
+  system: example-system
+  definition:
+    $text: https://example.com/openapi-specs/example-api.json

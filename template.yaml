@@ -21,6 +21,15 @@ spec:
           ui:field: TeamSelector
           ui:options:
             apiUrl: 'https://dummyjson.com/users'
+            
+    - title: Select ClusterType and Env 
+      description: Choose a cluster fetch from ServiceNow.
+      required: ['cluster']
+      properties:
+        team:
+          type: string
+          title: Select a Team
+          ui:field: ServiceNowExtension
 
   steps:
     - id: log
@@ -28,9 +37,9 @@ spec:
       action: debug:log
       input:
         message: >
-          The selected team is: ${{ parameters.team }}
+          The selected team is: ${{ parameters.team }} ${{ parameters.cluster }}
 
   output:
     text:
       - title: Selected Team
-        content: 'You selected: ${{ parameters.team }}'
+        content: 'You selected: ${{ parameters.team }} ${{ parameters.cluster }}'

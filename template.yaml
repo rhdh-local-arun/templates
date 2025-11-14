@@ -26,7 +26,7 @@ spec:
       description: Choose a cluster fetch from ServiceNow.
       required: ['cluster']
       properties:
-        team:
+        cluster:
           type: string
           title: Select a ClusterType
           ui:field: ServiceNowExtension

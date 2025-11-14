@@ -23,8 +23,8 @@ spec:
             apiUrl: 'https://dummyjson.com/users'
             
     - title: Select ClusterType and Env 
-      description: Choose a cluster fetch from ServiceNow.
-      required: ['cluster']
+      description: Choose a cluster / approvedDesigns fetch from ServiceNow.
+      required: ['cluster','approvedDesign']
       properties:
         cluster:
           type: string
@@ -32,6 +32,12 @@ spec:
           ui:field: ServiceNowExtension
           ui:options:
             apiUrl: 'https://dev308515.service-now.com/api/now/table/x_1856211_archit_0_approved_clusters?sysparm_limit=10'
+        approvedDesign:
+          type: string
+          title: Select a Approved Architecture Designs
+          ui:field: ServiceNowApprovedArchDesign
+          ui:options:
+            apiUrl: 'https://dev308515.service-now.com/api/now/table/x_1856211_demoapp_architecture_approved_designs?sysparm_limit=10'   
 
   steps:
     - id: log
@@ -39,9 +45,9 @@ spec:
       action: debug:log
       input:
         message: >
-          The selected team is: ${{ parameters.team }} ${{ parameters.cluster }}
+          The selected team is: ${{ parameters.team }} ${{ parameters.cluster }} {{parameters.approvedDesign}}
 
   output:
     text:
       - title: Selected Team
-        content: 'You selected: ${{ parameters.team }} ${{ parameters.cluster }}'
+        content: 'You selected: ${{ parameters.team }} ${{ parameters.cluster }} {{parameters.approvedDesign}}'

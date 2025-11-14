@@ -28,7 +28,7 @@ spec:
       properties:
         team:
           type: string
-          title: Select a Team
+          title: Select a ClusterType
           ui:field: ServiceNowExtension
           ui:options:
             apiUrl: 'https://dev308515.service-now.com/api/now/table/x_1856211_archit_0_approved_clusters?sysparm_limit=10'

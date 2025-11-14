@@ -30,6 +30,8 @@ spec:
           type: string
           title: Select a Team
           ui:field: ServiceNowExtension
+          ui:options:
+            apiUrl: 'https://dev308515.service-now.com/api/now/table/x_1856211_archit_0_approved_clusters?sysparm_limit=10'
 
   steps:
     - id: log

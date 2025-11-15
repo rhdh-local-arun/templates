@@ -26,13 +26,15 @@ spec:
       properties:
         cluster:
           type: string
-          title: Select a ClusterType
+          title: ClusterType
+          description: This Data is fetched from Service Now via API
           ui:field: ServiceNowExtension
           ui:options:
             apiUrl: 'https://dev308515.service-now.com/api/now/table/x_1856211_archit_0_approved_clusters?sysparm_limit=10'
         approvedDesign:
           type: string
-          title: Select a Approved Architecture Designs
+          title: Approved Architecture Designs
+          description: This Data is fetched from Service Now via API
           ui:field: ServiceNowApprovedArchDesign
           ui:options:
             apiUrl: 'https://dev308515.service-now.com/api/now/table/x_1856211_demoapp_architecture_approved_designs?sysparm_limit=10'   

@@ -20,32 +20,27 @@ spec:
         cluster_name:
           title: EKS Cluster Name
           type: string
-          default: "my-eks-cluster"
           description: Name of the AWS EKS cluster
 
         db_name:
           title: RDS Database Name
           type: string
-          default: "mydb"
           description: Name of the RDS PostgreSQL database
 
         s3_bucket_name:
           title: S3 Bucket Name
           type: string
-          default: "my-bucket"
           description: Name of the S3 bucket to be created
 
         db_username:
           title: RDS Username
           type: string
-          default: "admin"
           description: Username for RDS instance
 
         db_password:
           title: RDS Password
           type: string
           ui:widget: password
-          default: "changeme123"
           description: Password for RDS instance
 
 

@@ -21,7 +21,7 @@ spec:
     #         apiUrl: 'https://dummyjson.com/users'
             
     - title: Select ClusterType and Approved Architect Designs 
-      description: Choose a cluster / approvedDesigns fetch from ServiceNow.
+      description: Choose a Cluster / Approved Design fetch from ServiceNow.
       required: ['cluster','approvedDesign']
       properties:
         cluster:
@@ -79,9 +79,9 @@ spec:
       action: debug:log
       input:
         message: >
-          The selected team is: ${{ parameters.team }} ${{ parameters.cluster }} {{parameters.approvedDesign}}
+          Cluster ${{ parameters.cluster }} ${{ parameters.approvedDesign }}
 
   output:
     text:
       - title: Selected Team
-        content: 'You selected: ${{ parameters.team }} ${{ parameters.cluster }} {{parameters.approvedDesign}}'
+        content: 'You selected: ${{ parameters.cluster }} ${{parameters.approvedDesign}}'

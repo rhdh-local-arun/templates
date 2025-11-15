@@ -93,21 +93,45 @@ spec:
         targetPath: .
         values: ${{ parameters }}
 
-    - id: publish
-      name: Publish to GitHub
-      action: publish:github
-      input:
-        repoUrl: github.com?owner=${{ parameters.org_name }}&repo=${{ parameters.repo_name }}
-        description: Infrastructure for ${{ parameters.app_name }}
-        defaultBranch: main
-        protectDefaultBranch: true
+    # - id: publish
+    #   name: Publish to GitHub
+    #   action: publish:github
+    #   input:
+    #     repoUrl: github.com?owner=${{ parameters.org_name }}&repo=${{ parameters.repo_name }}
+    #     description: Infrastructure for ${{ parameters.app_name }}
+    #     defaultBranch: main
+    #     protectDefaultBranch: true
 
-    - id: register
-      name: Register in Catalog
-      action: catalog:register
+    # - id: register
+    #   name: Register in Catalog
+    #   action: catalog:register
+    #   input:
+    #     repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
+    #     catalogInfoPath: /catalog-info.yaml
+
+    - id: create_incident
+      name: Create ServiceNow Incident
+      action: http:request
       input:
-        repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
-        catalogInfoPath: /catalog-info.yaml
+        url: "${{ config.get('services.servicenow.baseUrl') }}/api/now/table/incident"
+        method: POST
+        headers:
+          Accept: "application/json"
+          "Content-Type": "application/json"
+          Authorization: "Basic ${{ encodeBase64(config.get('services.servicenow.username') + ':' + config.get('services.servicenow.password')) }}"
+        body: |
+          {
+            "short_description": "Provisioning Request based on Approved Design",
+            "description": "Provisioning Request based on Approved Design ${{ parameters.approvedDesign }} on ${{ parameters.cluster }}",
+            "urgency": "2",
+            "impact": "2",
+            "comments": "Please approve this Request. This is created for Application : ${{ parameters.app_name }}",
+            "caller_id": "admin",
+            "category": "${{ parameters.category }}",
+            "subcategory": "${{ parameters.subcategory }}"
+          }
+        parseJsonResponse: true
+    
     
     - id: log
       name: Log Selected Team

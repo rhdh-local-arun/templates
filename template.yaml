@@ -9,16 +9,27 @@ spec:
   type: service
 
   parameters:
-    # - title: Team Selection
-    #   description: Choose a team fetched from an external dummy API.
-    #   required: ['team']
-    #   properties:
-    #     team:
-    #       type: string
-    #       title: Select a Team
-    #       ui:field: TeamSelector
-    #       ui:options:
-    #         apiUrl: 'https://dummyjson.com/users'
+    - title: Application & Repository Info
+      required:
+        - repo_name
+        - app_name
+        - org_name
+      properties:
+
+        app_name:
+          title: Application Name
+          type: string
+          description: Name of the application this infra is for
+
+        repo_name:
+          title: Repository Name
+          type: string
+          description: Name of the Git repository to create
+          
+        org_name:
+          title: Organization Name
+          type: string
+          description: GitHub organization where the repo will be created
             
     - title: Select ClusterType and Approved Architect Designs 
       description: Choose a Cluster / Approved Design fetch from ServiceNow.

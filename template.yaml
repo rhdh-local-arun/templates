@@ -25,7 +25,7 @@ spec:
           title: Repository Name
           type: string
           description: Name of the Git repository to create
-          
+
         org_name:
           title: Organization Name
           type: string
@@ -85,6 +85,13 @@ spec:
           description: Password for RDS instance        
 
   steps:
+    - id: fetch
+      name: Fetch Terraform Project Skeleton
+      action: fetch:template
+      input:
+        url: ./terraform-sample-template/skeleton
+        targetPath: .
+        values: ${{ parameters }}
     - id: log
       name: Log Selected Team
       action: debug:log

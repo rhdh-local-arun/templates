@@ -1,0 +1,100 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: aws-infra-template
+  title: AWS EKS + RDS + S3 Terraform Template
+  description: Creates a Terraform project with EKS, RDS Postgres, and S3 bucket.
+spec:
+  owner: platform-team
+  type: service
+
+  parameters:
+    - title: Infrastructure Settings
+      required:
+        - cluster_name
+        - db_name
+        - s3_bucket_name
+        - db_username
+        - db_password
+      properties:
+        cluster_name:
+          title: EKS Cluster Name
+          type: string
+          default: "my-eks-cluster"
+          description: Name of the AWS EKS cluster
+
+        db_name:
+          title: RDS Database Name
+          type: string
+          default: "mydb"
+          description: Name of the RDS PostgreSQL database
+
+        s3_bucket_name:
+          title: S3 Bucket Name
+          type: string
+          default: "my-bucket"
+          description: Name of the S3 bucket to be created
+
+        db_username:
+          title: RDS Username
+          type: string
+          default: "admin"
+          description: Username for RDS instance
+
+        db_password:
+          title: RDS Password
+          type: string
+          ui:widget: password
+          default: "changeme123"
+          description: Password for RDS instance
+
+
+  steps:
+    - id: fetch
+      name: Fetch Terraform Project Skeleton
+      action: fetch:template
+      input:
+        url: ./skeleton
+        targetPath: .
+
+    - id: create_tfvars
+      name: Generate terraform.tfvars
+      action: fs:write
+      input:
+        path: terraform/terraform.tfvars
+        contents: |
+          cluster_name    = "${{ parameters.cluster_name }}"
+          db_name         = "${{ parameters.db_name }}"
+          s3_bucket_name  = "${{ parameters.s3_bucket_name }}"
+          db_username     = "${{ parameters.db_username }}"
+          db_password     = "${{ parameters.db_password }}"
+
+    - id: terraform_init
+      name: Terraform Init
+      action: execute:script
+      input:
+        workingDirectory: terraform
+        script: |
+          terraform init
+
+    - id: publish
+      name: Publish to GitHub
+      action: publish:github
+      input:
+        repoUrl: github.com?owner=your-org&repo=${{ parameters.cluster_name }}-infra
+        description: AWS Infrastructure Terraform Project
+
+    - id: register
+      name: Register in Backstage
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
+        catalogInfoPath: /catalog-info.yaml
+
+
+  output:
+    links:
+      - title: Created Repository
+        url: ${{ steps.publish.output.remoteUrl }}
+      - title: View in Backstage Catalog
+        url: ${{ steps.register.output.entityRef }}

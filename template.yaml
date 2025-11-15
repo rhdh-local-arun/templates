@@ -39,6 +39,40 @@ spec:
           ui:options:
             apiUrl: 'https://dev308515.service-now.com/api/now/table/x_1856211_demoapp_architecture_approved_designs?sysparm_limit=10'   
 
+    - title: Infrastructure Settings
+      required:
+        - cluster_name
+        - db_name
+        - s3_bucket_name
+        - db_username
+        - db_password
+      properties:
+        cluster_name:
+          title: EKS Cluster Name
+          type: string
+          description: Name of the AWS EKS cluster
+
+        db_name:
+          title: RDS Database Name
+          type: string
+          description: Name of the RDS PostgreSQL database
+
+        s3_bucket_name:
+          title: S3 Bucket Name
+          type: string
+          description: Name of the S3 bucket to be created
+
+        db_username:
+          title: RDS Username
+          type: string
+          description: Username for RDS instance
+
+        db_password:
+          title: RDS Password
+          type: string
+          ui:widget: password
+          description: Password for RDS instance        
+
   steps:
     - id: log
       name: Log Selected Team

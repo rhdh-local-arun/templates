@@ -117,6 +117,10 @@ spec:
           Cluster ${{ parameters.cluster }} ${{ parameters.approvedDesign }}
 
   output:
-    text:
-      - title: Selected Team
-        content: 'You selected: ${{ parameters.cluster }} ${{parameters.approvedDesign}}'
+    links:
+      - title: Open GitHub Repository
+        url: ${{ steps.publish.output.remoteUrl }}
+
+      - title: View in Catalog
+        url: ${{ steps.register.output.entityRef }}
+

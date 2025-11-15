@@ -93,14 +93,6 @@ spec:
         targetPath: .
         values: ${{ parameters }}
 
-    - id: generate
-      name: Generating Catalog Info
-      action: fetch:template
-      input:
-        url: ./terraform-sample-template/catalog-info.yaml
-        targetPath: .
-        values: ${{ parameters }}
-
     - id: publish
       name: Publish to GitHub
       action: publish:github

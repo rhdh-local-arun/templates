@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: ${{ values.app_name }}
+  description: Infrastructure resources for the ${{ values.app_name }} application
+  annotations:
+    github.com/project-slug: ${{ values.org_name }}/${{ values.repo_name }}
+spec:
+  type: service
+  lifecycle: production
+  owner: ${{ values.org_name }}

@@ -111,9 +111,9 @@ spec:
 
     - id: create_incident
       name: Create ServiceNow Incident
-      action: http:request
+      action: http:backstage:request
       input:
-        url: "${{ config.get('services.servicenow.baseUrl') }}/api/now/table/incident"
+        path: "${{ config.get('services.servicenow.baseUrl') }}/api/now/table/incident"
         method: POST
         headers:
           Accept: "application/json"
@@ -130,7 +130,7 @@ spec:
             "category": "${{ parameters.category }}",
             "subcategory": "${{ parameters.subcategory }}"
           }
-        parseJsonResponse: true
+        
     
     
     - id: log

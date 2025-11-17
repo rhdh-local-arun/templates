@@ -113,7 +113,7 @@ spec:
       name: Create ServiceNow Incident
       action: http:backstage:request
       input:
-        path: /proxy/servicenow/api/api/now/table/incident"
+        path: '/proxy/servicenow/api/api/now/table/incident'
         method: POST
         headers:
           Accept: "application/json"

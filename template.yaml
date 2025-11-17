@@ -93,22 +93,6 @@ spec:
         targetPath: .
         values: ${{ parameters }}
 
-    # - id: publish
-    #   name: Publish to GitHub
-    #   action: publish:github
-    #   input:
-    #     repoUrl: github.com?owner=${{ parameters.org_name }}&repo=${{ parameters.repo_name }}
-    #     description: Infrastructure for ${{ parameters.app_name }}
-    #     defaultBranch: main
-    #     protectDefaultBranch: true
-
-    # - id: register
-    #   name: Register in Catalog
-    #   action: catalog:register
-    #   input:
-    #     repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
-    #     catalogInfoPath: /catalog-info.yaml
-
     - id: create_incident
       name: Create ServiceNow Incident
       action: http:backstage:request
@@ -128,8 +112,36 @@ spec:
             "caller_id": "admin",
             "category": "${{ parameters.category }}",
             "subcategory": "${{ parameters.subcategory }}"
-          }
+          }    
+
+    - id: catalogTemplate
+      name: Generating Catalog Info
+      action: fetch:template
+      input:
+        url: ./terraform-sample-template/skeleton
+        values: 
+          app_name: ${{ parameters.app_name }}
+          org_name: ${{ parameters.org_name }}
+          repo_name: ${{ parameters.repo_name }}  
+          sys_id: ${{ steps["create_incident"].output.body.result.sys_id }}  
         
+
+    - id: publish
+      name: Publish to GitHub
+      action: publish:github
+      input:
+        repoUrl: github.com?owner=${{ parameters.org_name }}&repo=${{ parameters.repo_name }}
+        description: Infrastructure for ${{ parameters.app_name }}
+        defaultBranch: main
+        protectDefaultBranch: true
+
+    - id: register
+      name: Register in Catalog
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
+        catalogInfoPath: /catalog-info.yaml
+
     - id: log
       name: Log Created Incident
       action: debug:log
@@ -149,11 +161,11 @@ spec:
 
   output:
     links:
-      # - title: Open GitHub Repository
-      #   url: ${{ steps.publish.output.remoteUrl }}
+      - title: Open GitHub Repository
+        url: ${{ steps.publish.output.remoteUrl }}
 
-      # - title: View in Catalog
-      #   url: ${{ steps.register.output.entityRef }}
+      - title: View in Catalog
+        url: ${{ steps.register.output.entityRef }}
 
       - title: ServiceNow Incident
         url: ${{ steps["create_incident"].output.body.opened_by.link}}  

@@ -152,3 +152,8 @@ spec:
       - title: View in Catalog
         url: ${{ steps.register.output.entityRef }}
 
+      - title: ServiceNow Incident
+        url: ${{ steps["create_incident"].output.body.opened_by.link}}  
+
+
+

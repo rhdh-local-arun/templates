@@ -5,7 +5,7 @@ metadata:
    title: AWS EKS + RDS + S3 Terraform Template
    description: Creates a Terraform project with EKS, RDS Postgres, and S3 bucket.
 spec:
-  owner: user:guest
+  owner: user:arunhari82
   type: service
 
   parameters:

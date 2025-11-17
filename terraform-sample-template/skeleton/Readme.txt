@@ -29,5 +29,5 @@ Cluster Type : ${{ values.cluster }}
 Clone the repository:
 
 ```bash
-git clone https://github.com/your-org/terraform-scaffolder.git
+git clone https://github.com/rhdh-local-arun/${{values.repo_name}}.git
 cd terraform-scaffolder

@@ -136,6 +136,9 @@ spec:
       input:
         message: >
           Output: ${{ steps["create_incident"].output.body | dump}}
+          IncidentNo: ${{ steps["create_incident"].output.body.result.task_effective_number }}
+          Link: ${{ steps["create_incident"].output.body.result.opened_by.link }}
+          SysId: ${{ steps["create_incident"].output.body.result.sys_id }}
     
     - id: log
       name: Log Selected Team

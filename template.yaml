@@ -130,7 +130,12 @@ spec:
             "subcategory": "${{ parameters.subcategory }}"
           }
         
-    
+    - id: log
+      name: Log Created Incident
+      action: debug:log
+      input:
+        message: >
+          '{{ steps["create_incident"].output.body }}'
     
     - id: log
       name: Log Selected Team

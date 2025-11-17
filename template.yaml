@@ -123,7 +123,8 @@ spec:
           app_name: ${{ parameters.app_name }}
           org_name: ${{ parameters.org_name }}
           repo_name: ${{ parameters.repo_name }}  
-          sys_id: ${{ steps["create_incident"].output.body.result.sys_id }}  
+          sys_id: ${{ steps["create_incident"].output.body.result.sys_id }}
+          incident_number : ${{ steps["create_incident"].output.body.result.task_effective_number }}  
         
 
     - id: publish

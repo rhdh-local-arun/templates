@@ -12,10 +12,10 @@ metadata:
       title: ${{ values.incident_number }}
       icon: web  
   tags:
-    - EKS
-    - ApprovedDesign
-    - Terraform
-    - Provisioning
+    - eks
+    - approved-design
+    - terraform
+    - provisioning
 spec:
   type: service
   lifecycle: production

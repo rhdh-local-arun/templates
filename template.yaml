@@ -146,11 +146,11 @@ spec:
 
   output:
     links:
-      - title: Open GitHub Repository
-        url: ${{ steps.publish.output.remoteUrl }}
+      # - title: Open GitHub Repository
+      #   url: ${{ steps.publish.output.remoteUrl }}
 
-      - title: View in Catalog
-        url: ${{ steps.register.output.entityRef }}
+      # - title: View in Catalog
+      #   url: ${{ steps.register.output.entityRef }}
 
       - title: ServiceNow Incident
         url: ${{ steps["create_incident"].output.body.opened_by.link}}  

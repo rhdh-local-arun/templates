@@ -113,12 +113,11 @@ spec:
       name: Create ServiceNow Incident
       action: http:backstage:request
       input:
-        path: "${{ config.get('services.servicenow.baseUrl') }}/api/now/table/incident"
+        path: /proxy/servicenow/api/api/now/table/incident"
         method: POST
         headers:
           Accept: "application/json"
-          "Content-Type": "application/json"
-          Authorization: "Basic ${{ encodeBase64(config.get('services.servicenow.username') + ':' + config.get('services.servicenow.password')) }}"
+          Content-Type: "application/json"
         body: |
           {
             "short_description": "Provisioning Request based on Approved Design",

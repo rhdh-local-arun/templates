@@ -135,7 +135,7 @@ spec:
       action: debug:log
       input:
         message: >
-          Output: {{ steps["create_incident"].output.body }}
+          Output: ${{ steps["create_incident"].output.body }}
     
     - id: log
       name: Log Selected Team

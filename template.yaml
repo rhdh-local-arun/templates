@@ -2,7 +2,7 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
    name: aws-infra-template
-   title: AWS EKS + RDS + S3 Terraform Template
+   title: Approved Architecture Provisioning Template
    description: Creates a Terraform project with EKS, RDS Postgres, and S3 bucket.
 spec:
   owner: user:arunhari82

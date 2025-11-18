@@ -143,22 +143,22 @@ spec:
         repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
         catalogInfoPath: /catalog-info.yaml
 
-    - id: log
-      name: Log Created Incident
-      action: debug:log
-      input:
-        message: >
-          Output: ${{ steps["create_incident"].output.body | dump}}
-          IncidentNo: ${{ steps["create_incident"].output.body.result.task_effective_number }}
-          Link: ${{ steps["create_incident"].output.body.result.opened_by.link }}
-          SysId: ${{ steps["create_incident"].output.body.result.sys_id }}
+    # - id: log
+    #   name: Log Created Incident
+    #   action: debug:log
+    #   input:
+    #     message: >
+    #       Output: ${{ steps["create_incident"].output.body | dump}}
+    #       IncidentNo: ${{ steps["create_incident"].output.body.result.task_effective_number }}
+    #       Link: ${{ steps["create_incident"].output.body.result.opened_by.link }}
+    #       SysId: ${{ steps["create_incident"].output.body.result.sys_id }}
     
-    - id: log
-      name: Log Selected Team
-      action: debug:log
-      input:
-        message: >
-          Cluster ${{ parameters.cluster }} ${{ parameters.approvedDesign }}
+    # - id: log
+    #   name: Log Selected Team
+    #   action: debug:log
+    #   input:
+    #     message: >
+    #       Cluster ${{ parameters.cluster }} ${{ parameters.approvedDesign }}
 
   output:
     links:
@@ -169,8 +169,8 @@ spec:
         entityRef: ${{ steps.register.output.entityRef }}
         icon: catalog
 
-      - title: ServiceNow Incident
-        url: ${{ steps["create_incident"].output.body.opened_by.link}}  
+      # - title: ServiceNow Incident
+      #   url: ${{ steps["create_incident"].output.body.opened_by.link}}  
 
 
 

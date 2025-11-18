@@ -7,6 +7,8 @@ metadata:
     github.com/project-slug: ${{ values.org_name }}/${{ values.repo_name }}
     terraform/organization: orgName
     terraform/workspaces: workspaceName1,workspaceName2,workspaceName
+    backstage.io/adr-location: "./docs/adrs/"
+
   links: 
     - url: "https://dev308515.service-now.com/now/nav/ui/classic/params/target/incident.do?sys_id=${{ values.sys_id}}"
       title: ${{ values.incident_number }}

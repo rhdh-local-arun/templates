@@ -11,7 +11,7 @@ metadata:
 
   links: 
     - url: "https://dev308515.service-now.com/now/nav/ui/classic/params/target/incident.do?sys_id=${{ values.sys_id}}"
-      title: ${{ values.incident_number }}
+      title: 'Servicenow Incident : ${{ values.incident_number }}'
       icon: web  
   tags:
     - eks

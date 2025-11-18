@@ -166,7 +166,8 @@ spec:
         url: ${{ steps.publish.output.remoteUrl }}
 
       - title: View in Catalog
-        url: ${{ steps.register.output.entityRef }}
+        entityRef: ${{ steps.register.output.entityRef }}
+        icon: catalog
 
       - title: ServiceNow Incident
         url: ${{ steps["create_incident"].output.body.opened_by.link}}  
